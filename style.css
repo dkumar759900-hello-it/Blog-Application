@@ -1,0 +1,407 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+header {
+    background-color: #1e293b;
+    padding: 18px 8%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 28px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: white;
+    color: #2563eb;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Blog Section */
+.blogs {
+    padding: 60px 8%;
+    text-align: center;
+}
+
+.blogs h2 {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.blog-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card h3 {
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.blog-card p {
+    margin-bottom: 15px;
+    color: #64748b;
+}
+
+.blog-card a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background-color: #1e293b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .blog-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* Login and Register Pages */
+
+.auth-section {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.auth-container>p {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 13px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-btn:hover {
+    background: #1d4ed8;
+}
+
+.auth-container .auth-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-link a,
+.back-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* Dashboard Page */
+
+.dashboard {
+    min-height: 80vh;
+    padding: 50px 8%;
+    background-color: #f4f6f9;
+}
+
+.dashboard>h1 {
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.dashboard>p {
+    color: #64748b;
+    margin-bottom: 35px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h2 {
+    color: #2563eb;
+    font-size: 35px;
+}
+
+.stat-card p {
+    color: #64748b;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.create-btn {
+    background: #2563eb;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dashboard-blog-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dashboard-blog-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-blog-card h3 {
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.dashboard-blog-card p {
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.dashboard-blog-card span {
+    color: #16a34a;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-blog-container {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* Create Blog Page */
+
+.create-section {
+    min-height: 80vh;
+    padding: 50px 20px;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-container {
+    width: 100%;
+    max-width: 700px;
+    background-color: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.create-container h1 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.create-container>p {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.create-container select,
+.create-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.create-container select:focus,
+.create-container textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.create-container textarea {
+    resize: vertical;
+}
+
+@media (max-width: 768px) {
+    .create-container {
+        padding: 22px;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MyBlog</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">MyBlog</h2>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="create-blog.html">Create Blog</a></li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+
+        <h1>Welcome to Your Dashboard!</h1>
+        <p>Manage your blogs and share your ideas.</p>
+
+        <!-- Statistics -->
+        <div class="stats-container">
+
+            <div class="stat-card">
+                <h2 id="totalBlogs">3</h2>
+                <p>Total Blogs</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="publishedBlogs">3</h2>
+                <p>Published Blogs</p>
+            </div>
+
+        </div>
+
+        <!-- My Blogs -->
+        <section class="my-blogs">
+
+            <div class="section-heading">
+                <h2>My Blogs</h2>
+
+                <a href="create-blog.html" class="create-btn">
+                    + Create New Blog
+                </a>
+            </div>
+
+            <div class="dashboard-blog-container">
+
+                <div class="dashboard-blog-card">
+                    <h3>Getting Started with Web Development</h3>
+                    <p>Learn HTML, CSS and JavaScript basics.</p>
+                    <span>Published</span>
+                </div>
+
+                <div class="dashboard-blog-card">
+                    <h3>Importance of Learning Programming</h3>
+                    <p>Improve your problem-solving skills.</p>
+                    <span>Published</span>
+                </div>
+
+                <div class="dashboard-blog-card">
+                    <h3>Tips for Student Developers</h3>
+                    <p>Learn how to improve your coding skills.</p>
+                    <span>Published</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MyBlog. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

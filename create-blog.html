@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog - MyBlog</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">MyBlog</h2>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="create-section">
+
+        <div class="create-container">
+
+            <h1>Create New Blog</h1>
+            <p>Share your thoughts and ideas with the world.</p>
+
+            <form id="createBlogForm">
+
+                <div class="form-group">
+                    <label for="blogTitle">Blog Title</label>
+                    <input type="text" id="blogTitle" placeholder="Enter blog title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="blogCategory">Blog Category</label>
+
+                    <select id="blogCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Education">Education</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="blogDescription">Blog Description</label>
+                    <input type="text" id="blogDescription" placeholder="Write a short description" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="blogContent">Blog Content</label>
+                    <textarea id="blogContent" rows="8" placeholder="Write your blog here..." required></textarea>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    Publish Blog
+                </button>
+
+            </form>
+
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MyBlog. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
