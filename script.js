@@ -1,67 +1,142 @@
 
+// USER LOGIN WITH BACKEND API
+const loginForm = document.querySelector("#loginForm");
+
+if (loginForm) {
+
+    loginForm.addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+
+        try {
+
+            const response = await fetch(
+                "http://localhost:5000/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+                localStorage.setItem("token", data.token);
+
+                alert("Login Successful!");
+
+                window.location.href = "dashboard.html";
+
+            } else {
+
+                alert(data.message || "Login failed!");
+
+            }
+
+        } catch (error) {
+
+            console.error("Login Error:", error);
+            alert("Unable to connect to server!");
+
+        }
+
+    });
+
+}
+
 // DASHBOARD BLOGS
-const dashboardContainer =
-    document.querySelector(".dashboard-blog-container");
+const dashboardContainer = document.querySelector(".dashboard-blog-container");
 
-if (dashboardContainer) {
+async function loadDashboardBlogs() {
 
-    let blogs = JSON.parse(localStorage.getItem("myBlogs")) || [];
+    if (!dashboardContainer) return;
 
-    // Remove duplicate blogs
-    const uniqueBlogs = [];
+    const token = localStorage.getItem("token");
 
-    blogs.forEach(function (blog) {
+    if (!token) {
+        dashboardContainer.textContent = "Please login to view your blogs.";
+        return;
+    }
 
-        const alreadyExists = uniqueBlogs.some(function (item) {
-            return item.title === blog.title &&
-                item.category === blog.category &&
-                item.content === blog.content;
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/blogs/my-blogs",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch blogs");
+        }
+
+        const blogs = await response.json();
+
+        dashboardContainer.innerHTML = "";
+
+        blogs.forEach(function (blog) {
+
+            const blogCard = document.createElement("div");
+            blogCard.className = "dashboard-blog-card";
+
+            const title = document.createElement("h3");
+            title.textContent = blog.title;
+
+            const description = document.createElement("p");
+            description.textContent = blog.description || "";
+
+            const category = document.createElement("p");
+            category.textContent = "Category: " + blog.category;
+
+            const status = document.createElement("span");
+            status.textContent = blog.status || "Published";
+
+            blogCard.appendChild(title);
+            blogCard.appendChild(description);
+            blogCard.appendChild(category);
+            blogCard.appendChild(status);
+
+            dashboardContainer.appendChild(blogCard);
+
         });
 
-        if (!alreadyExists) {
-            uniqueBlogs.push(blog);
+        const totalBlogs = document.querySelector("#totalBlogs");
+        const publishedBlogs = document.querySelector("#publishedBlogs");
+
+        if (totalBlogs) {
+            totalBlogs.textContent = blogs.length;
         }
-    });
 
-    // Save unique blogs
-    localStorage.setItem("myBlogs", JSON.stringify(uniqueBlogs));
+        if (publishedBlogs) {
+            publishedBlogs.textContent = blogs.filter(
+                blog => blog.status === "Published"
+            ).length;
+        }
 
-    // Display saved blogs
-    uniqueBlogs.forEach(function (blog) {
+        if (blogs.length === 0) {
+            dashboardContainer.textContent = "No blogs found.";
+        }
 
-        const blogCard = document.createElement("div");
-        blogCard.className = "dashboard-blog-card";
+    } catch (error) {
 
-        const title = document.createElement("h3");
-        title.textContent = blog.title;
+        console.error("Dashboard Error:", error);
+        dashboardContainer.textContent = "Unable to load blogs.";
 
-        const description = document.createElement("p");
-        description.textContent = blog.description;
-
-        const category = document.createElement("p");
-        category.textContent = "Category: " + blog.category;
-
-        const status = document.createElement("span");
-        status.textContent = "Published";
-
-        blogCard.appendChild(title);
-        blogCard.appendChild(description);
-        blogCard.appendChild(category);
-        blogCard.appendChild(status);
-
-        dashboardContainer.appendChild(blogCard);
-    });
-
-    // Update counters
-    const totalBlogs = document.querySelector("#totalBlogs");
-    const publishedBlogs = document.querySelector("#publishedBlogs");
-
-    const sampleBlogCount =
-        dashboardContainer.querySelectorAll(".dashboard-blog-card").length
-        - uniqueBlogs.length;
-
-    const total = sampleBlogCount + uniqueBlogs.length;
-
-    totalBlogs.textContent = total;
-    publishedBlogs.textContent = total;
+    }
 }
+
+loadDashboardBlogs();
