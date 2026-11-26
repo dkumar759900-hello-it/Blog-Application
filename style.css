@@ -405,3 +405,179 @@ footer {
         padding: 22px;
     }
 }
+
+
+/* MODULE 6 - UI IMPROVEMENTS */
+
+/* Smooth Experience */
+html {
+    scroll-behavior: smooth;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+a,
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover,
+.create-btn:hover,
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Better Blog Cards */
+.blog-card,
+.dashboard-blog-card,
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover,
+.dashboard-blog-card:hover,
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* Better Form Fields */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Tablet Responsive */
+@media (max-width: 992px) {
+
+    .blog-container,
+    .dashboard-blog-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        padding: 18px 5%;
+    }
+
+    .dashboard {
+        padding: 40px 5%;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    header {
+        padding: 16px 15px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 65px 18px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .blogs {
+        padding: 40px 18px;
+    }
+
+    .blog-container,
+    .dashboard-blog-container,
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard {
+        padding: 35px 18px;
+    }
+
+    .dashboard>h1 {
+        font-size: 27px;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .create-btn {
+        display: inline-block;
+    }
+
+    .auth-container,
+    .create-container {
+        padding: 22px;
+    }
+
+    .create-section {
+        padding: 30px 15px;
+    }
+
+    .stat-card {
+        padding: 25px 18px;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 18px 12px;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 360px) {
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .auth-container,
+    .create-container {
+        padding: 18px;
+    }
+}
