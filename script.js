@@ -218,30 +218,73 @@ async function loadDashboardBlogs() {
 
         dashboardContainer.innerHTML = "";
 
-        blogs.forEach(blog => {
-            const card = document.createElement("div");
-            card.className = "dashboard-blog-card";
 
-            const title = document.createElement("h3");
-            title.textContent = blog.title;
+        blogs.forEach(function (blog) {
 
-            const description = document.createElement("p");
-            description.textContent = blog.description || "";
+            const blogCard = document.createElement("div");
+            blogCard.className = "dashboard-blog-card";
 
-            const category = document.createElement("p");
-            category.textContent = "Category: " + blog.category;
+            blogCard.innerHTML = `
+        <h3>${blog.title}</h3>
+        <p>${blog.description || ""}</p>
+        <p>Category: ${blog.category}</p>
+        <span>${blog.status || "Published"}</span>
+        <br><br>
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+    `;
 
-            const status = document.createElement("span");
-            status.textContent = blog.status || "Published";
+            // Edit Blog
+            blogCard.querySelector(".edit-btn").addEventListener("click", async () => {
 
-            const detailsLink = document.createElement("a");
-            detailsLink.href =
-                `blog-details.html?id=${encodeURIComponent(blog._id)}`;
-            detailsLink.textContent = "View Details";
+                const title = prompt("Enter new blog title:", blog.title);
+                if (!title) return;
 
-            card.append(title, description, category, status, detailsLink);
-            dashboardContainer.appendChild(card);
+                const response = await fetch(
+                    `http://localhost:5000/api/blogs/${blog._id}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            title,
+                            category: blog.category,
+                            description: blog.description,
+                            content: blog.content
+                        })
+                    }
+                );
+
+                const data = await response.json();
+                alert(data.message);
+                loadDashboardBlogs();
+            });
+
+            // Delete Blog
+            blogCard.querySelector(".delete-btn").addEventListener("click", async () => {
+
+                if (!confirm("Are you sure you want to delete this blog?")) return;
+
+                const response = await fetch(
+                    `http://localhost:5000/api/blogs/${blog._id}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    }
+                );
+
+                const data = await response.json();
+                alert(data.message);
+                loadDashboardBlogs();
+            });
+
+            dashboardContainer.appendChild(blogCard);
         });
+
 
         const totalBlogs = document.querySelector("#totalBlogs");
         const publishedBlogs = document.querySelector("#publishedBlogs");

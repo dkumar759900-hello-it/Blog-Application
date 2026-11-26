@@ -63,6 +63,18 @@ router.get("/", async (req, res) => {
     }
 });
 
+// Get Logged-in User's Blogs
+router.get("/my-blogs", verifyToken, async (req, res) => {
+    try {
+        const blogs = await Blog.find({ author: req.userId })
+            .sort({ createdAt: -1 });
+
+        res.json(blogs);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 // Get Single Blog Details
 router.get("/:id", async (req, res) => {
@@ -84,18 +96,57 @@ router.get("/:id", async (req, res) => {
         });
     }
 });
--
 
-    // Get Logged-in User's Blogs
-    router.get("/my-blogs", verifyToken, async (req, res) => {
-        try {
-            const blogs = await Blog.find({ author: req.userId });
 
-            res.json(blogs);
+// Update Blog
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const { title, category, description, content } = req.body;
 
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+        const blog = await Blog.findOneAndUpdate(
+            { _id: req.params.id, author: req.userId },
+            { title, category, description, content },
+            { new: true, runValidators: true }
+        );
+
+        if (!blog) {
+            return res.status(404).json({
+                message: "Blog not found"
+            });
         }
-    });
+
+        res.json({
+            message: "Blog updated successfully",
+            blog
+        });
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Delete Blog
+router.delete("/:id", verifyToken, async (req, res) => {
+    try {
+        const blog = await Blog.findOneAndDelete({
+            _id: req.params.id,
+            author: req.userId
+        });
+
+        if (!blog) {
+            return res.status(404).json({
+                message: "Blog not found"
+            });
+        }
+
+        res.json({
+            message: "Blog deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 
 module.exports = router;

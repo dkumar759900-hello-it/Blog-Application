@@ -82,3 +82,70 @@
 </body>
 
 </html>
+
+
+// CREATE BLOG WITH BACKEND API
+const createBlogForm = document.querySelector("#createBlogForm");
+
+if (createBlogForm) {
+
+createBlogForm.addEventListener("submit", async function (e) {
+
+e.preventDefault();
+
+const token = localStorage.getItem("token");
+
+if (!token) {
+alert("Please login first!");
+window.location.href = "login.html";
+return;
+}
+
+const title = document.querySelector("#blogTitle").value;
+const category = document.querySelector("#blogCategory").value;
+const description = document.querySelector("#blogDescription").value;
+const content = document.querySelector("#blogContent").value;
+
+try {
+
+const response = await fetch(
+"http://localhost:5000/api/blogs/create",
+{
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+"Authorization": `Bearer ${token}`
+},
+body: JSON.stringify({
+title,
+category,
+description,
+content
+})
+}
+);
+
+const data = await response.json();
+
+if (response.ok) {
+
+alert("Blog Published Successfully!");
+createBlogForm.reset();
+window.location.href = "dashboard.html";
+
+} else {
+
+alert(data.message || "Unable to publish blog.");
+
+}
+
+} catch (error) {
+
+console.error("Create Blog Error:", error);
+alert("Unable to connect to server!");
+
+}
+
+});
+
+}
