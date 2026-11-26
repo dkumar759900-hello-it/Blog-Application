@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - MyBlog</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- Navigation Bar -->
     <header>
         <nav class="navbar">
             <h2 class="logo">MyBlog</h2>
@@ -18,26 +18,39 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="create-blog.html">Create Blog</a></li>
-                <li><a href="login.html">Logout</a></li>
+                <li><a href="all-blogs.html">All Blogs</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Dashboard Section -->
     <main class="dashboard">
 
         <h1>Welcome to Your Dashboard!</h1>
         <p>Manage your blogs and share your ideas.</p>
 
-        <!-- Statistics -->
+        <!-- User Profile -->
+        <section class="stat-card">
+            <h2>My Profile</h2>
+
+            <p>Name: <strong id="profileName">Loading...</strong></p>
+
+            <p>Email: <strong id="profileEmail">Loading...</strong></p>
+
+            <p>Account Status: <strong>Logged In</strong></p>
+        </section>
+
+        <!-- Blog Statistics -->
         <div class="stats-container">
 
             <div class="stat-card">
-                <h2 id="totalBlogs">3</h2>
+                <h2 id="totalBlogs">0</h2>
                 <p>Total Blogs</p>
             </div>
 
             <div class="stat-card">
-                <h2 id="publishedBlogs">3</h2>
+                <h2 id="publishedBlogs">0</h2>
                 <p>Published Blogs</p>
             </div>
 
@@ -55,31 +68,14 @@
             </div>
 
             <div class="dashboard-blog-container">
-
-                <div class="dashboard-blog-card">
-                    <h3>Getting Started with Web Development</h3>
-                    <p>Learn HTML, CSS and JavaScript basics.</p>
-                    <span>Published</span>
-                </div>
-
-                <div class="dashboard-blog-card">
-                    <h3>Importance of Learning Programming</h3>
-                    <p>Improve your problem-solving skills.</p>
-                    <span>Published</span>
-                </div>
-
-                <div class="dashboard-blog-card">
-                    <h3>Tips for Student Developers</h3>
-                    <p>Learn how to improve your coding skills.</p>
-                    <span>Published</span>
-                </div>
-
+                <p>Loading your blogs...</p>
             </div>
 
         </section>
 
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 MyBlog. All Rights Reserved.</p>
     </footer>

@@ -315,3 +315,70 @@ loadLatestBlogs();
 loadAllBlogs();
 loadBlogDetails();
 loadDashboardBlogs();
+
+
+
+// MODULE 5: PROTECTED DASHBOARD
+const currentToken = localStorage.getItem("token");
+
+if (window.location.pathname.endsWith("dashboard.html")) {
+
+    if (!currentToken) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+    }
+}
+
+// LOGOUT FUNCTIONALITY
+const logoutBtn = document.querySelector("#logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        localStorage.removeItem("token");
+
+        window.location.href = "login.html";
+    });
+}
+
+// LOAD USER PROFILE
+async function loadUserProfile() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/auth/profile",
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const user = await response.json();
+
+        document.querySelector("#profileName").textContent = user.name;
+        document.querySelector("#profileEmail").textContent = user.email;
+
+    } catch (error) {
+        console.error("Profile Error:", error);
+    }
+}
+
+// Run profile function only on dashboard
+if (document.querySelector("#profileName")) {
+    loadUserProfile();
+}
